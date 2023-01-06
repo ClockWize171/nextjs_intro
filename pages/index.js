@@ -1,8 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 const Home = () => {
+  const { data: session, status} = useSession()
+  console.log(session)
   const router = useRouter()
 
   const handleClick = () => {
@@ -11,7 +14,31 @@ const Home = () => {
   }
 
   return (
-    <div>
+    <div><br />
+      <div style={{ display: "inline" }}>
+        {session === null ?
+          <Link href='/api/auth/signin'>
+            <button
+              disabled={status === 'loading' ? true : false}
+              onClick={e => {
+                e.preventDefault()
+                signIn('github')
+              }}>Sign in (GitHub)</button>
+          </Link>
+          : <Link href='/api/auth/signout'>
+            <button onClick={e => {
+              e.preventDefault()
+              signOut()
+            }}>Sign out</button>
+          </Link>}
+
+
+      </div>
+      {status === 'authenticated' ?
+        <p>Signed in as <i>{session.user.name}</i></p>
+        :
+        <p>Your are a <i>Guest</i></p>
+      }
       <h1>
         Home Page
       </h1>
