@@ -17,6 +17,7 @@ const Home = () => {
       </h1>
       <div>
         <Link href='/blog'>Blog</Link><br />
+        <Link href='/about'>About</Link><br />
         <Link href='/product'>Product</Link><br />
         <Link href='/profile'>Profile</Link><br />
         <Link href='/docs'>Docs</Link><br />
@@ -26,6 +27,7 @@ const Home = () => {
         <Link href='/dashboard'>Dashboard</Link><br />
         <Link href='/dashboard-swr'>DashboardSWR</Link><br />
         <Link href='/comments'>Comments api route</Link><br />
+        <Link href='/pets'>Next Image</Link><br />
       </div>
       <button onClick={handleClick}>
         Place Order
