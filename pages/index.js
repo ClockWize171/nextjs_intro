@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { signIn, signOut, useSession } from 'next-auth/react'
 
 const Home = () => {
-  const { data: session, status} = useSession()
+  const { data: session, status } = useSession()
   console.log(session)
   const router = useRouter()
 
@@ -51,7 +51,11 @@ const Home = () => {
         <Link href='/users'>Users</Link><br />
         <Link href='/posts'>Posts</Link><br />
         <Link href='/news'>News</Link><br />
-        <Link href='/dashboard'>Dashboard</Link><br />
+        {status === 'authenticated' ?
+          <Link href='/dashboard'>Dashboard</Link> :
+          <Link href="/">Dashboard (disabled)</Link>}
+        <br />
+
         <Link href='/dashboard-swr'>DashboardSWR</Link><br />
         <Link href='/comments'>Comments api route</Link><br />
         <Link href='/pets'>Next Image</Link><br />

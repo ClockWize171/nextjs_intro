@@ -2,7 +2,7 @@ import React from 'react'
 
 const Header = () => {
     return (
-        <div className='layout-header'>Header</div>
+        <div className='layout-header'>NextJS 13</div>
     )
 }
 

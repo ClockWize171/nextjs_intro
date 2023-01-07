@@ -1,14 +1,25 @@
 import React, { useState, useEffect } from 'react'
+import { signIn, getSession } from 'next-auth/react'
 
 const Dashboard = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [dashboardData, setDashboardData] = useState(null)
+
+
     useEffect(() => {
         const fetchDashboardData = async () => {
             const response = await fetch('http://localhost:4000/dashboard')
             const data = await response.json()
             setDashboardData(data)
             setIsLoading(false)
+
+            // Secure Page
+            const session = await getSession();
+            if (!session) {
+                signIn()
+            } else {
+                setIsLoading(false)
+            }
         }
         fetchDashboardData()
     }, [])
@@ -17,7 +28,7 @@ const Dashboard = () => {
         return <h2>Loading...</h2>
     }
 
-    return(
+    return (
         <div>
             <h2><i>Client-Side Data Fetching</i></h2>
             <h2>Dashboard</h2>
