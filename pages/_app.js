@@ -4,18 +4,20 @@ import 'styles/globals.css'
 import 'styles/layout.css'
 import { SessionProvider } from 'next-auth/react'
 
-export default function App({ Component, pageProps }) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps }
+}) {
 
   if (Component.getLayout) {
     return Component.getLayout(<Component {...pageProps} />)
   }
 
   return (
-    <>
-      <SessionProvider>
-        <Header />
-        <Component {...pageProps} />
-        <Footer />
-      </SessionProvider>
-    </>)
+    <SessionProvider session={session}>
+      <Header />
+      <Component {...pageProps} />
+      <Footer />
+    </SessionProvider>
+  )
 }

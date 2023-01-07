@@ -38,9 +38,9 @@ const CommentsPage = () => {
             <button onClick={fetchComments}>Load comments</button>
             {
                 comments.map(comment => (
-                    <div key={comment.id}>
-                        {comment.id} {comment.text}
-                        <button onClick={() => deleteComment(comment.id)}>Delete</button>
+                    <div key={comment?.id}>
+                        {comment?.id} {comment?.text}
+                        <button onClick={() => deleteComment(comment?.id)}>Delete</button>
                     </div>
                 ))
             }

@@ -5,7 +5,7 @@ import { signIn, signOut, useSession } from 'next-auth/react'
 
 const Home = () => {
   const { data: session, status } = useSession()
-  console.log(session)
+  console.log({ session, status })
   const router = useRouter()
 
   const handleClick = () => {
@@ -15,29 +15,10 @@ const Home = () => {
 
   return (
     <div><br />
-      <div style={{ display: "inline" }}>
-        {session === null ?
-          <Link href='/api/auth/signin'>
-            <button
-              disabled={status === 'loading' ? true : false}
-              onClick={e => {
-                e.preventDefault()
-                signIn('github')
-              }}>Sign in (GitHub)</button>
-          </Link>
-          : <Link href='/api/auth/signout'>
-            <button onClick={e => {
-              e.preventDefault()
-              signOut()
-            }}>Sign out</button>
-          </Link>}
-
-
-      </div>
-      {status === 'authenticated' ?
-        <p>Signed in as <i>{session.user.name}</i></p>
-        :
+      {session === null ?
         <p>Your are a <i>Guest</i></p>
+        :
+        <p>Signed in as <i>{session?.user?.name}</i></p>
       }
       <h1>
         Home Page
